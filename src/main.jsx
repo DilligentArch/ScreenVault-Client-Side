@@ -9,11 +9,12 @@ import AuthProvider from "./AuthProvider/AuthProvider";
 import AuthSystem from "./AuthSystem/AuthSystem";
 import Login from "./AuthLayout.jsx/Login";
 import Register from "./AuthLayout.jsx/Register";
+import HomeLayout from "./HomeLayout/HomeLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <HomeLayout></HomeLayout>,
   },
   {
     path: "/auth",
