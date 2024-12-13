@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AllMovies = ({ singleData }) => {
-    const { _id, title, genre, releaseYear, rating, poster, summary, duration } = singleData; // Destructure movie data
-
+const Home = ({singleData}) => {
+    const { _id, title, genre, releaseYear, rating, poster, summary, duration } = singleData;
     return (
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             {/* Movie Poster */}
@@ -38,4 +37,4 @@ const AllMovies = ({ singleData }) => {
     );
 };
 
-export default AllMovies;
+export default Home;

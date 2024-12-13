@@ -18,6 +18,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout></HomeLayout>,
+    loader:()=>fetch('http://localhost:5000/movies/top-rated'),
   },
   {
     path: "/add-movie",
