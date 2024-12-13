@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.star-container {
+    display: flex; /* Ensures stars are displayed horizontally */
+    align-items: center;
+    justify-content: flex-start; /* Aligns the stars to the left */
+  }
+  

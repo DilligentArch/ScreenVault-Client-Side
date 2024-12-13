@@ -10,11 +10,23 @@ import AuthSystem from "./AuthSystem/AuthSystem";
 import Login from "./AuthLayout.jsx/Login";
 import Register from "./AuthLayout.jsx/Register";
 import HomeLayout from "./HomeLayout/HomeLayout";
+import AddMoviesLayout from "./AddMoviesLayout/AddMoviesLayout";
+
+import AllMoviesLayout from "./AllMoviesLayout/AllMoviesLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout></HomeLayout>,
+  },
+  {
+    path: "/add-movie",
+    element: <AddMoviesLayout></AddMoviesLayout>,
+  },
+  {
+    path: "/all-movies",
+    element: <AllMoviesLayout></AllMoviesLayout>,
+    loader:()=>fetch('http://localhost:5000/movies'),
   },
   {
     path: "/auth",
