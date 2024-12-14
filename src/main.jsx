@@ -14,11 +14,18 @@ import AddMoviesLayout from "./AddMoviesLayout/AddMoviesLayout";
 
 import AllMoviesLayout from "./AllMoviesLayout/AllMoviesLayout";
 
+import MovieDetailsLayout from "./MovieDetailsLayout/MovieDetailsLayout";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout></HomeLayout>,
     loader:()=>fetch('http://localhost:5000/movies/top-rated'),
+  },
+  {
+    path: "/movies/:id", 
+    element: <MovieDetailsLayout />,
+    loader: ({ params }) =>fetch(`http://localhost:5000/movies/${params.id}`),
   },
   {
     path: "/add-movie",

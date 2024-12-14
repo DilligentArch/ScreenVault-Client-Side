@@ -27,7 +27,7 @@ const AllMovies = ({ singleData }) => {
                 {/* See Details Button */}
                 <div className="flex justify-end items-center ">
                     <Link
-                        to={`/movie/${_id}`}
+                        to={`/movies/${_id}`}
                         className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition"
                     >
                         See Details
