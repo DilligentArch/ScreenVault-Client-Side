@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import AuthProvider from "./AuthProvider/AuthProvider";
+import AuthProvider, { AuthContext } from "./AuthProvider/AuthProvider";
 import AuthSystem from "./AuthSystem/AuthSystem";
 import Login from "./AuthLayout.jsx/Login";
 import Register from "./AuthLayout.jsx/Register";
@@ -15,8 +15,11 @@ import AddMoviesLayout from "./AddMoviesLayout/AddMoviesLayout";
 import AllMoviesLayout from "./AllMoviesLayout/AllMoviesLayout";
 
 import MovieDetailsLayout from "./MovieDetailsLayout/MovieDetailsLayout";
+import PrivateRoute from "./PrivateLayout/PrivateRoute";
+import FavoriteMovieLayout from "./FavoriteMovieLayout/FavoriteMovieLayout";
 
 const router = createBrowserRouter([
+ 
   {
     path: "/",
     element: <HomeLayout></HomeLayout>,
@@ -24,12 +27,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/movies/:id", 
-    element: <MovieDetailsLayout />,
+    element: <PrivateRoute>
+      <MovieDetailsLayout />,
+    </PrivateRoute>,
     loader: ({ params }) =>fetch(`http://localhost:5000/movies/${params.id}`),
   },
   {
+    path: "/favorites/:email", 
+    element: <PrivateRoute>
+      <FavoriteMovieLayout></FavoriteMovieLayout>
+    </PrivateRoute>,
+    loader: ({ params }) =>fetch(`http://localhost:5000/favorites/${params.email}`)
+  },
+  {
     path: "/add-movie",
-    element: <AddMoviesLayout></AddMoviesLayout>,
+    element: <PrivateRoute>
+      <AddMoviesLayout></AddMoviesLayout>
+    </PrivateRoute>,
   },
   {
     path: "/all-movies",

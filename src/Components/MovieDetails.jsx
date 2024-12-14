@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const MovieDetails = () => {
+  const {user}= useContext(AuthContext);
   const movie = useLoaderData();
   console.log(movie);
   const navigate = useNavigate();
@@ -42,13 +44,19 @@ const MovieDetails = () => {
 
   const handleAddToFavorites = () => {
     const favoriteMovie = {
-      userEmail: "user@example.com", // Replace with logged-in user's email
-      movieId: movie._id,
-      title: movie.title,
-      poster: movie.poster,
-      genre: movie.genre,
-      releaseYear: movie.releaseYear,
+      userEmail: user.email,
+      _id, 
+      title, 
+      genre, 
+      releaseYear, 
+      rating, 
+      poster, 
+  
+      duration 
     };
+   
+
+  
 
     fetch("http://localhost:5000/favorites", {
       method: "POST",
@@ -64,6 +72,15 @@ const MovieDetails = () => {
         }
       })
       .catch((error) => toast.error("Failed to add to favorites."));
+
+
+
+
+
+
+
+
+      
   };
 
   return (
