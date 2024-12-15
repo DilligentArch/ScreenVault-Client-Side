@@ -17,7 +17,9 @@ const Navbar = () => {
       "/favorites": "ScreenVault | My Favorites",
       "/auth/login": "ScreenVault | Login",
       "/auth/register": "ScreenVault | Register",
-      "/extras": "ScreenVault | Extras",
+      "/about-us": "ScreenVault | About Us",
+      "/movies/:id": "ScreenVault | Movie Details",
+      "/update-movie/:id": "ScreenVault | Update Movie "
     };
 
     document.title = Titles[location.pathname] || "ScreenVault | Explore Movies";
@@ -71,8 +73,8 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/extras" className="hover:text-teal-600">
-                Extras
+              <NavLink to="/about-us" className="hover:text-teal-600">
+               About Us
               </NavLink>
             </li>
             {user && (
@@ -128,14 +130,14 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to="/extras"
+              to="/about-us"
               className={({ isActive }) =>
                 isActive
                   ? "text-orange-400 font-bold"
                   : "text-white hover:text-orange-600"
               }
             >
-              Extras
+              About Us
             </NavLink>
           </li>
           {user && (

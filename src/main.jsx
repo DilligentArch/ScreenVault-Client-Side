@@ -20,6 +20,8 @@ import FavoriteMovieLayout from "./FavoriteMovieLayout/FavoriteMovieLayout";
 import UpdateMovie from "./Components/UpdateMovie";
 import UpdateMovieLayout from "./UpdateMovieLayout/UpdateMovieLayout";
 import NotFound from "./Components/NotFound";
+import AboutUsLayout from "./AboutUsLayout/AboutUsLayout";
+
 
 const router = createBrowserRouter([
  
@@ -61,6 +63,11 @@ const router = createBrowserRouter([
     path: "/all-movies",
     element: <AllMoviesLayout></AllMoviesLayout>,
     loader:()=>fetch('https://screenvault-server.vercel.app/movies'),
+  },
+  {
+    path: "/about-us",
+    element: <AboutUsLayout></AboutUsLayout>
+  
   },
   {
     path: "/auth",

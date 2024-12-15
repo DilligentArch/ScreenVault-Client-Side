@@ -1,6 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
 
 const AddMovies = () => {
   const { user } = useContext(AuthContext);
@@ -9,12 +11,16 @@ const AddMovies = () => {
     title: "",
     genre: "",
     duration: "",
-    releaseYear: "",  // Text input for release year
+    releaseYear: "", // Initially empty
     rating: 0, // Rating initialized to 0
     summary: "",
   });
 
-  const genres = ["Comedy", "Drama", "Horror", "Action","Thriller", "Romance", "Sci-Fi"];
+  const genres = ["Comedy", "Drama", "Horror", "Action", "Thriller", "Romance", "Sci-Fi"];
+
+  // Generate an array of years from 1900 to the current year
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: currentYear - 1900 + 1 }, (_, i) => 1900 + i);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -24,10 +30,8 @@ const AddMovies = () => {
 
   // Validate the form
   const validateForm = () => {
-    const { poster, title, genre, duration, releaseYear, rating, summary } =
-      movieData;
+    const { poster, title, genre, duration, releaseYear, rating, summary } = movieData;
 
-    // URL validation
     if (!poster || !/^https?:\/\/.+/.test(poster)) {
       toast.error("Please provide a valid image URL.");
       return false;
@@ -72,8 +76,7 @@ const AddMovies = () => {
     if (validateForm()) {
       const form = e.target;
       const email = form.email.value;
-      const { poster, title, genre, duration, releaseYear, rating, summary } =
-        movieData;
+      const { poster, title, genre, duration, releaseYear, rating, summary } = movieData;
 
       const newMovie = {
         email,
@@ -89,16 +92,15 @@ const AddMovies = () => {
       fetch('https://screenvault-server.vercel.app/movies', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(newMovie),
       })
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           if (data.insertedId) toast.success("Movie added successfully!");
         });
 
-      // Don't reset form if validation fails
       setMovieData({
         poster: "",
         title: "",
@@ -111,16 +113,23 @@ const AddMovies = () => {
     }
   };
 
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-teal-50">
       <Toaster />
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-teal-500 mb-6">
+        <h2
+          className="text-3xl font-bold text-center text-teal-500 mb-6"
+          data-aos="fade-up"
+        >
           Add a Movie
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Email (Read-only) */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="100">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Your Email
             </label>
@@ -135,7 +144,7 @@ const AddMovies = () => {
           </div>
 
           {/* Movie Poster */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="200">
             <label htmlFor="poster" className="block text-sm font-medium text-gray-700">
               Movie Poster URL
             </label>
@@ -151,7 +160,7 @@ const AddMovies = () => {
           </div>
 
           {/* Movie Title */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="300">
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">
               Movie Title
             </label>
@@ -167,7 +176,7 @@ const AddMovies = () => {
           </div>
 
           {/* Genre */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="400">
             <label htmlFor="genre" className="block text-sm font-medium text-gray-700">
               Genre
             </label>
@@ -188,7 +197,7 @@ const AddMovies = () => {
           </div>
 
           {/* Duration */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="500">
             <label htmlFor="duration" className="block text-sm font-medium text-gray-700">
               Duration (minutes)
             </label>
@@ -204,24 +213,29 @@ const AddMovies = () => {
             />
           </div>
 
-          {/* Release Year  */}
-          <div>
+          {/* Release Year (Dropdown) */}
+          <div data-aos="fade-up" data-aos-delay="600">
             <label htmlFor="releaseYear" className="block text-sm font-medium text-gray-700">
               Release Year
             </label>
-            <input
-              type="number"
+            <select
               name="releaseYear"
               value={movieData.releaseYear}
               onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-              placeholder="Enter release year"
               required
-            />
+            >
+              <option value="">Select a year</option>
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Rating */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="700">
             <label htmlFor="rating" className="block text-sm font-medium text-gray-700">
               Rating (1 to 5)
             </label>
@@ -239,7 +253,7 @@ const AddMovies = () => {
           </div>
 
           {/* Summary */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="800">
             <label htmlFor="summary" className="block text-sm font-medium text-gray-700">
               Summary
             </label>
