@@ -83,7 +83,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/favorites/:email" className="hover:text-teal-600">
+                  <NavLink to={`/favorites/${user.email}`} className="hover:text-teal-600">
                     My Favorites
                   </NavLink>
                 </li>
@@ -154,7 +154,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to="favorites/:email"
+                  to={`/favorites/${user.email}`}
                   className={({ isActive }) =>
                     isActive
                       ? "text-orange-400 font-bold"

@@ -2,7 +2,8 @@ import React from 'react';
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Fotter';
 import FavoriteMovie from '../Components/FavoriteMovie';
-const FavoriteMovieLayout = () => {
+const FavoriteMovieLayout = ({data}) => {
+    console.log(data);
     return (
         <div>
             <Navbar></Navbar>
