@@ -21,6 +21,7 @@ import UpdateMovie from "./Components/UpdateMovie";
 import UpdateMovieLayout from "./UpdateMovieLayout/UpdateMovieLayout";
 import NotFound from "./Components/NotFound";
 import AboutUsLayout from "./AboutUsLayout/AboutUsLayout";
+import ResetPassword from "./Components/ResetPassword";
 
 
 const router = createBrowserRouter([
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
       },
      
     ],

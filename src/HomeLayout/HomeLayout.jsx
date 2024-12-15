@@ -49,7 +49,7 @@ const HomeLayout = () => {
           </div>
         </div>
         {/* Link to All Movies Section */}
-        <div className="bg-teal-500 py-12">
+        <div className="bg-teal-500 py-12 max-w-screen-2xl mx-auto">
           <div className="container mx-auto text-center text-white">
             <h2 className="text-3xl font-semibold mb-6">
               Ready to Explore More Movies?
@@ -67,7 +67,7 @@ const HomeLayout = () => {
         </div>
 
         {/* Trending Movies Section */}
-        <div className="bg-gray-100 py-12">
+        <div className="bg-gray-100 py-12 max-w-screen-2xl mx-auto">
           <div className="container mx-auto">
             <h2
               className="text-3xl font-semibold text-gray-700 text-center mb-6"
@@ -106,7 +106,7 @@ const HomeLayout = () => {
         </div>
 
         {/* Movie Insights Section */}
-        <div className="bg-gray-800 text-white py-12">
+        <div className="bg-gray-800 text-white py-12 max-w-screen-2xl mx-auto">
           <div className="container mx-auto">
             <h2
               className="text-3xl font-semibold text-teal-400 text-center mb-6"

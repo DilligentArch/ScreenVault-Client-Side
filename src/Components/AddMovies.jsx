@@ -1,133 +1,65 @@
-import React, { useState, useContext, useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import React, { useContext, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 
 const AddMovies = () => {
   const { user } = useContext(AuthContext);
-  const [movieData, setMovieData] = useState({
-    poster: "",
-    title: "",
-    genre: "",
-    duration: "",
-    releaseYear: "", // Initially empty
-    rating: 0, // Rating initialized to 0
-    summary: "",
-  });
+
+  // Use React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
   const genres = ["Comedy", "Drama", "Horror", "Action", "Thriller", "Romance", "Sci-Fi"];
-
-  // Generate an array of years from 1900 to the current year
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: currentYear - 1900 + 1 }, (_, i) => 1900 + i);
-
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setMovieData({ ...movieData, [name]: value });
-  };
-
-  // Validate the form
-  const validateForm = () => {
-    const { poster, title, genre, duration, releaseYear, rating, summary } = movieData;
-
-    if (!poster || !/^https?:\/\/.+/.test(poster)) {
-      toast.error("Please provide a valid image URL.");
-      return false;
-    }
-
-    if (!title || title.length < 2) {
-      toast.error("Title must be at least 2 characters long.");
-      return false;
-    }
-
-    if (!genre) {
-      toast.error("Please select a genre.");
-      return false;
-    }
-
-    if (!duration || parseInt(duration) < 60) {
-      toast.error("Duration must be at least 60 minutes.");
-      return false;
-    }
-
-    if (!releaseYear || isNaN(releaseYear) || releaseYear < 1900) {
-      toast.error("Please provide a valid release year.");
-      return false;
-    }
-
-    if (!rating || rating < 1 || rating > 5) {
-      toast.error("Rating must be between 1 and 5.");
-      return false;
-    }
-
-    if (!summary || summary.length < 10) {
-      toast.error("Summary must be at least 10 characters long.");
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      const form = e.target;
-      const email = form.email.value;
-      const { poster, title, genre, duration, releaseYear, rating, summary } = movieData;
-
-      const newMovie = {
-        email,
-        poster,
-        title,
-        genre,
-        duration,
-        releaseYear,
-        rating,
-        summary,
-      };
-
-      fetch('https://screenvault-server.vercel.app/movies', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newMovie),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.insertedId) toast.success("Movie added successfully!");
-        });
-
-      setMovieData({
-        poster: "",
-        title: "",
-        genre: "",
-        duration: "",
-        releaseYear: "",
-        rating: 0,
-        summary: "",
-      });
-    }
-  };
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
+  // Handle form submission
+  const onSubmit = (data) => {
+    const newMovie = {
+      ...data,
+      email: user?.email,
+    };
+
+    fetch("https://screenvault-server.vercel.app/movies", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newMovie),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          toast.success("Movie added successfully!");
+          reset(); 
+        }
+      })
+      .catch((err) => {
+        toast.error("Failed to add the movie.");
+        console.error(err);
+      });
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-teal-50">
       <Toaster />
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-8">
-        <h2
-          className="text-3xl font-bold text-center text-teal-500 mb-6"
-          data-aos="fade-up"
-        >
+        <h2 className="text-3xl font-bold text-center text-teal-500 mb-6" data-aos="fade-up">
           Add a Movie
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Email (Read-only) */}
           <div data-aos="fade-up" data-aos-delay="100">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -140,6 +72,7 @@ const AddMovies = () => {
               value={user?.email || ""}
               readOnly
               className="w-full px-3 py-2 mt-1 border bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+              {...register("email")}
             />
           </div>
 
@@ -151,12 +84,11 @@ const AddMovies = () => {
             <input
               type="url"
               name="poster"
-              value={movieData.poster}
-              onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter movie poster URL"
-              required
+              {...register("poster", { required: "Poster URL is required", pattern: /^https?:\/\/.+/ })}
             />
+            {errors.poster && <p className="text-red-500 text-sm">{errors.poster.message}</p>}
           </div>
 
           {/* Movie Title */}
@@ -167,12 +99,11 @@ const AddMovies = () => {
             <input
               type="text"
               name="title"
-              value={movieData.title}
-              onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter movie title"
-              required
+              {...register("title", { required: "Title is required", minLength: { value: 2, message: "Title must be at least 2 characters long" } })}
             />
+            {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
           </div>
 
           {/* Genre */}
@@ -182,10 +113,8 @@ const AddMovies = () => {
             </label>
             <select
               name="genre"
-              value={movieData.genre}
-              onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-              required
+              {...register("genre", { required: "Please select a genre" })}
             >
               <option value="">Select a genre</option>
               {genres.map((genre) => (
@@ -194,6 +123,7 @@ const AddMovies = () => {
                 </option>
               ))}
             </select>
+            {errors.genre && <p className="text-red-500 text-sm">{errors.genre.message}</p>}
           </div>
 
           {/* Duration */}
@@ -204,26 +134,23 @@ const AddMovies = () => {
             <input
               type="number"
               name="duration"
-              value={movieData.duration}
-              onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter duration"
               min="60"
-              required
+              {...register("duration", { required: "Duration is required", min: { value: 60, message: "Duration must be at least 60 minutes" } })}
             />
+            {errors.duration && <p className="text-red-500 text-sm">{errors.duration.message}</p>}
           </div>
 
-          {/* Release Year (Dropdown) */}
+          {/* Release Year */}
           <div data-aos="fade-up" data-aos-delay="600">
             <label htmlFor="releaseYear" className="block text-sm font-medium text-gray-700">
               Release Year
             </label>
             <select
               name="releaseYear"
-              value={movieData.releaseYear}
-              onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-              required
+              {...register("releaseYear", { required: "Release year is required" })}
             >
               <option value="">Select a year</option>
               {years.map((year) => (
@@ -232,6 +159,7 @@ const AddMovies = () => {
                 </option>
               ))}
             </select>
+            {errors.releaseYear && <p className="text-red-500 text-sm">{errors.releaseYear.message}</p>}
           </div>
 
           {/* Rating */}
@@ -242,15 +170,15 @@ const AddMovies = () => {
             <input
               type="number"
               name="rating"
-              value={movieData.rating}
-              onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter a rating"
               min="1"
               max="5"
-              required
+              {...register("rating", { required: "Rating is required", min: { value: 1, message: "Rating must be at least 1" }, max: { value: 5, message: "Rating cannot be more than 5" } })}
             />
+            {errors.rating && <p className="text-red-500 text-sm">{errors.rating.message}</p>}
           </div>
+
 
           {/* Summary */}
           <div data-aos="fade-up" data-aos-delay="800">
@@ -259,13 +187,12 @@ const AddMovies = () => {
             </label>
             <textarea
               name="summary"
-              value={movieData.summary}
-              onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter a short summary"
               rows="4"
-              required
+              {...register("summary", { required: "Summary is required", minLength: { value: 10, message: "Summary must be at least 10 characters long" } })}
             ></textarea>
+            {errors.summary && <p className="text-red-500 text-sm">{errors.summary.message}</p>}
           </div>
 
           <button

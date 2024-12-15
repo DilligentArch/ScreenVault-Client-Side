@@ -48,16 +48,24 @@ const FavoriteMovieLayout = () => {
   return (
     <div>
       <Navbar />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-11 px-6">
-        {mainData.map((singleData) => (
-          <FavoriteMovie
-            key={singleData._id} // Provide a unique key for each movie
-            singleData={singleData}
-            handleDelete={handleDelete}
-          />
-        ))}
+      <div className="container mx-auto px-6 py-12">
+        {mainData.length === 0 ? (
+          <p className="text-center text-gray-500 text-lg">
+            You don't have any favorite movies yet. Start adding your favorite movies to this list!
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-11">
+            {mainData.map((singleData) => (
+              <FavoriteMovie
+                key={singleData._id} // Provide a unique key for each movie
+                singleData={singleData}
+                handleDelete={handleDelete}
+              />
+            ))}
+          </div>
+        )}
       </div>
-      <Footer />
+    <div className="mt-[15rem]">  <Footer /></div>
     </div>
   );
 };

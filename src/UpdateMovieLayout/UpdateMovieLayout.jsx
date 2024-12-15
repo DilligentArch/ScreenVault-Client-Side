@@ -7,8 +7,8 @@ const UpdateMovieLayout = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <main><UpdateMovie></UpdateMovie></main>
-            <Footer></Footer>
+            <main className='max-w-screen-2xl mx-auto'><UpdateMovie></UpdateMovie></main>
+            <footer><Footer></Footer></footer>
         </div>
     );
 };
