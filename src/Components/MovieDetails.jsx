@@ -90,7 +90,7 @@ const MovieDetails = () => {
         <img
           src={poster}
           alt={title}
-          className="w-3/5 mx-auto h-[35rem] rounded-lg mb-6"
+          className="w-full md:w-3/5 mx-auto h-[35rem] rounded-lg mb-6"
         />
         <h2 className="text-3xl font-bold text-teal-600 mb-4">{movie.title}</h2>
         <p className="text-gray-700">

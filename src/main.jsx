@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     element: <PrivateRoute>
       <FavoriteMovieLayout></FavoriteMovieLayout>
     </PrivateRoute>,
-    loader: ({ params }) => fetch(`http://localhost:5000/movies/${params.email}`)
+    loader: ({ params }) => fetch(`http://localhost:5000/favorites/${params.email}`)
   },
   {
     path: "/add-movie",
