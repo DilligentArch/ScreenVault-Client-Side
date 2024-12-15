@@ -15,11 +15,12 @@ const UpdateMovie = () => {
     genre: movie.genre || "",
     duration: movie.duration || "",
     releaseYear: movie.releaseYear || "",
-    rating: movie.rating || 0,
+    rating: movie.rating || 0, // Make sure the rating is a number
     summary: movie.summary || "",
   });
 
   const genres = ["Comedy", "Drama", "Horror", "Action", "Romance", "Sci-Fi"];
+  const years = Array.from({ length: 50 }, (_, i) => 2023 - i); // Generate years from 2023 to 1973
 
   // Handle input changes
   const handleChange = (e) => {
@@ -107,24 +108,12 @@ const UpdateMovie = () => {
           Update Movie
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Email (Read-only) */}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Your Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={user?.email || ""}
-              readOnly
-              className="w-full px-3 py-2 mt-1 border bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-            />
-          </div>
-
           {/* Movie Poster */}
           <div>
-            <label htmlFor="poster" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="poster"
+              className="block text-sm font-medium text-gray-700"
+            >
               Movie Poster URL
             </label>
             <input
@@ -140,7 +129,10 @@ const UpdateMovie = () => {
 
           {/* Movie Title */}
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700"
+            >
               Movie Title
             </label>
             <input
@@ -156,7 +148,10 @@ const UpdateMovie = () => {
 
           {/* Genre */}
           <div>
-            <label htmlFor="genre" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="genre"
+              className="block text-sm font-medium text-gray-700"
+            >
               Genre
             </label>
             <select
@@ -177,7 +172,10 @@ const UpdateMovie = () => {
 
           {/* Duration */}
           <div>
-            <label htmlFor="duration" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="duration"
+              className="block text-sm font-medium text-gray-700"
+            >
               Duration (minutes)
             </label>
             <input
@@ -192,43 +190,59 @@ const UpdateMovie = () => {
             />
           </div>
 
-          {/* Release Year */}
+          {/* Release Year (Dropdown) */}
           <div>
-            <label htmlFor="releaseYear" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="releaseYear"
+              className="block text-sm font-medium text-gray-700"
+            >
               Release Year
             </label>
-            <input
-              type="number"
+            <select
               name="releaseYear"
               value={movieData.releaseYear}
               onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-              placeholder="Enter release year"
               required
-            />
+            >
+              <option value="">Select a year</option>
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {/* Rating */}
+          {/* Rating (Dropdown) */}
           <div>
-            <label htmlFor="rating" className="block text-sm font-medium text-gray-700">
-              Rating (1 to 5)
+            <label
+              htmlFor="rating"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Rating
             </label>
-            <input
-              type="number"
+            <select
               name="rating"
               value={movieData.rating}
               onChange={handleChange}
               className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-              placeholder="Enter a rating"
-              min="1"
-              max="5"
               required
-            />
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           </div>
 
           {/* Summary */}
           <div>
-            <label htmlFor="summary" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="summary"
+              className="block text-sm font-medium text-gray-700"
+            >
               Summary
             </label>
             <textarea

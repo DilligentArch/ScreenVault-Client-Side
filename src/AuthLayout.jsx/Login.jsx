@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const emailRef = useRef();
-  const { userLogin, setUser, handleSignInWithGoogle } = useContext(AuthContext);
+  const { userLogin, setUser, handleSignInWithGoogle,loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,7 +15,7 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-
+    setLoading(true);
     userLogin(email, password)
       .then((result) => {
         const user = result.user;
@@ -28,10 +28,12 @@ const Login = () => {
       })
       .catch((err) => {
         toast.error(err.message || "Failed to log in. Please try again.");
+        setLoading(false);
       });
   };
 
   const loginWithGoogle = () => {
+    setLoading(true);
     handleSignInWithGoogle()
       .then((result) => {
         const user = result.user;
@@ -41,6 +43,7 @@ const Login = () => {
         navigate(redirectPath, { replace: true });
 
         toast.success("You have logged in successfully");
+        setLoading(false);
       })
       .catch((err) => {
         toast.error(err.message || "Failed to log in with Google. Please try again.");

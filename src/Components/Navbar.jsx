@@ -1,12 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
 const Navbar = () => {
   const location = useLocation();
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // State for loading spinner
+  const [isLoading, setIsLoading] = useState(false);
 
   // Dynamic titles based on the route
   useEffect(() => {
@@ -30,6 +33,20 @@ const Navbar = () => {
     toast.success("Successfully logged out!");
     navigate("/");
   };
+
+  // Handle navigation with spinner
+  const handleNavLinkClick = () => {
+    setIsLoading(true); // Set loading state to true
+  };
+
+  // If loading is true, show the spinner
+  if (isLoading || loading) {
+    return (
+      <div className="flex min-h-screen justify-center items-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
 
   return (
     <nav className="navbar bg-teal-500 text-white max-w-screen-2xl mx-auto shadow-md">
@@ -63,29 +80,29 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] w-52 rounded-box bg-white p-2 shadow text-teal-500"
           >
             <li>
-              <NavLink to="/" className="hover:text-teal-600">
+              <NavLink to="/" className="hover:text-teal-600" onClick={handleNavLinkClick}>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/all-movies" className="hover:text-teal-600">
+              <NavLink to="/all-movies" className="hover:text-teal-600" onClick={handleNavLinkClick}>
                 All Movies
               </NavLink>
             </li>
             <li>
-              <NavLink to="/about-us" className="hover:text-teal-600">
-               About Us
+              <NavLink to="/about-us" className="hover:text-teal-600" onClick={handleNavLinkClick}>
+                About Us
               </NavLink>
             </li>
             {user && (
               <>
                 <li>
-                  <NavLink to="/add-movie" className="hover:text-teal-600">
+                  <NavLink to="/add-movie" className="hover:text-teal-600" onClick={handleNavLinkClick}>
                     Add Movie
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/favorites/${user.email}`} className="hover:text-teal-600">
+                  <NavLink to={`/favorites/${user.email}`} className="hover:text-teal-600" onClick={handleNavLinkClick}>
                     My Favorites
                   </NavLink>
                 </li>
@@ -112,6 +129,7 @@ const Navbar = () => {
                   ? "text-orange-400 font-bold"
                   : "text-white hover:text-orange-600"
               }
+              onClick={handleNavLinkClick}
             >
               Home
             </NavLink>
@@ -124,6 +142,7 @@ const Navbar = () => {
                   ? "text-orange-400 font-bold"
                   : "text-white hover:text-orange-600"
               }
+              onClick={handleNavLinkClick}
             >
               All Movies
             </NavLink>
@@ -136,6 +155,7 @@ const Navbar = () => {
                   ? "text-orange-400 font-bold"
                   : "text-white hover:text-orange-600"
               }
+              onClick={handleNavLinkClick}
             >
               About Us
             </NavLink>
@@ -150,6 +170,7 @@ const Navbar = () => {
                       ? "text-orange-400 font-bold"
                       : "text-white hover:text-orange-600"
                   }
+                  onClick={handleNavLinkClick}
                 >
                   Add Movie
                 </NavLink>
@@ -162,6 +183,7 @@ const Navbar = () => {
                       ? "text-orange-400 font-bold"
                       : "text-white hover:text-orange-600"
                   }
+                  onClick={handleNavLinkClick}
                 >
                   My Favorites
                 </NavLink>

@@ -5,13 +5,13 @@ import { useLoaderData, Link } from 'react-router-dom';
 import Home from '../Components/Home';
 import SliderSection from '../Components/SliderSection';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
+import 'aos/dist/aos.css'; 
 
 const HomeLayout = () => {
   const data = useLoaderData();
 
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Initialize AOS with default duration
+    AOS.init({ duration: 1000 }); 
   }, []);
 
   return (

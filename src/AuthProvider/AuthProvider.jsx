@@ -76,6 +76,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     logOut,
     handleSignInWithGoogle,
+   setLoading
     // resetPassword, // Added resetPassword to context
   };
 

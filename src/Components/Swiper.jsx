@@ -44,7 +44,7 @@ const sliderData = [
     img: 'https://i.ibb.co.com/3r0Qy9p/MV5-BMj-A4-NDI0-MTIx-NF5-BMl5-Ban-Bn-Xk-Ft-ZTYw-NTM0-Mz-Y2-V1.jpg',
     title: 'The Prestige',
     genre: 'Drama',
-    rating: '4/5',
+    rating: '5/5',
   },
 ];
 
