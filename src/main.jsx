@@ -19,11 +19,13 @@ import PrivateRoute from "./PrivateLayout/PrivateRoute";
 import FavoriteMovieLayout from "./FavoriteMovieLayout/FavoriteMovieLayout";
 import UpdateMovie from "./Components/UpdateMovie";
 import UpdateMovieLayout from "./UpdateMovieLayout/UpdateMovieLayout";
+import NotFound from "./Components/NotFound";
 
 const router = createBrowserRouter([
  
   {
     path: "/",
+    errorElement:<NotFound></NotFound>,
     element: <HomeLayout></HomeLayout>,
     loader:()=>fetch('https://screenvault-server.vercel.app/movies/top-rated'),
   },

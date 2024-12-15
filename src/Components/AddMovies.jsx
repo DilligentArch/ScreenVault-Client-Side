@@ -14,7 +14,7 @@ const AddMovies = () => {
     summary: "",
   });
 
-  const genres = ["Comedy", "Drama", "Horror", "Action", "Romance", "Sci-Fi"];
+  const genres = ["Comedy", "Drama", "Horror", "Action","Thriller", "Romance", "Sci-Fi"];
 
   // Handle input changes
   const handleChange = (e) => {
@@ -204,7 +204,7 @@ const AddMovies = () => {
             />
           </div>
 
-          {/* Release Year - Text input instead of dropdown */}
+          {/* Release Year  */}
           <div>
             <label htmlFor="releaseYear" className="block text-sm font-medium text-gray-700">
               Release Year

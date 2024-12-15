@@ -3,38 +3,81 @@ import 'swiper/css';
 import 'swiper/css/autoplay'; // Import Swiper autoplay styles
 import { Autoplay } from 'swiper/modules'; // Import Swiper autoplay module
 
+const sliderData = [
+  {
+    img: 'https://i.ibb.co.com/QFyFRB2/c53c956d6cd3631a7f82ee91a9d0baca.jpg',
+    title: 'Avatar',
+    genre: 'Sci-Fi',
+    rating: '5/5',
+  },
+  {
+    img: 'https://i.ibb.co.com/C1hHghr/MV5-BZTVk-ZWY5-Mm-It-Yj-Y3-OS00-OWY3-LTg2-NWEt-OWE1-Nm-Q4-NGMw-ZGNl-Xk-Ey-Xk-Fqc-Gc-V1.jpg',
+    title: 'Transformers: Rise of the Beasts',
+    genre: 'Action',
+    rating: '4/5',
+  },
+  {
+    img: 'https://i.ibb.co.com/8B23J9s/n0-W7kaj-F4-GFMRk2c0w-Ww-MQq-Ta-DM.jpg',
+    title: 'The Dictator',
+    genre: 'Comedy',
+    rating: '5/5',
+  },
+  {
+    img: 'https://i.ibb.co.com/8ch52SV/MV5-BNz-Y3-OWQ5-NDkt-NWQ2-OC00-Zjdl-LThk-Mm-It-MDhh-NDk3-NTFi-ZGU4-Xk-Ey-Xk-Fqc-Gc-V1.jpg',
+    title: ' Joker',
+    genre: 'Thriller',
+    rating: '5/5',
+  },
+  {
+    img: 'https://i.ibb.co.com/99gPF3w/inception-leonardo-dicaprio-movie-posters-2400x3500-entertainment-movies-hd-art-wallpaper-preview.jpg',
+    title: 'Inception',
+    genre: 'Thriller',
+    rating: '5/5',
+  },
+  {
+    img: 'https://i.ibb.co.com/FHk6VkS/51bsjerr5z-L.jpg',
+    title: 'The Dark Knight',
+    genre: 'Action',
+    rating: '5/5',
+  },
+  {
+    img: 'https://i.ibb.co.com/3r0Qy9p/MV5-BMj-A4-NDI0-MTIx-NF5-BMl5-Ban-Bn-Xk-Ft-ZTYw-NTM0-Mz-Y2-V1.jpg',
+    title: 'The Prestige',
+    genre: 'Drama',
+    rating: '4/5',
+  },
+];
+
 export default () => {
   return (
     <Swiper
-      spaceBetween={0} // Remove the gap between slides
-      slidesPerView={3} // Default slides per view (on larger screens)
+      spaceBetween={0}
+      slidesPerView={3}
       breakpoints={{
-        320: { // For screens with width >= 320px (mobile)
-          slidesPerView: 1, // Show 1 slide on mobile
-          spaceBetween: 10, // Optional: Adjust the space between slides for mobile
-        },
-        768: { // For screens with width >= 768px (tablet and larger)
-          slidesPerView: 2, // Show 2 slides on tablets
-        },
-        1024: { // For screens with width >= 1024px (desktop)
-          slidesPerView: 3, // Show 3 slides on desktop
-        },
+        320: { slidesPerView: 1, spaceBetween: 10 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
       }}
-      modules={[Autoplay]} // Include the autoplay module
-      autoplay={{
-        delay: 3000, // Delay between transitions (in ms)
-        disableOnInteraction: false, // Keep autoplay active on user interaction
-      }}
-      loop={true} // Enable infinite loop
+      modules={[Autoplay]}
+      autoplay={{ delay: 3000, disableOnInteraction: false }}
+      loop={true}
     >
-      <SwiperSlide><img className='w-full h-[33rem] ' src={'https://i.ibb.co.com/QFyFRB2/c53c956d6cd3631a7f82ee91a9d0baca.jpg'} alt="Slide 1" /></SwiperSlide>
-      <SwiperSlide><img className='w-full h-[33rem] ' src={'https://i.ibb.co.com/C1hHghr/MV5-BZTVk-ZWY5-Mm-It-Yj-Y3-OS00-OWY3-LTg2-NWEt-OWE1-Nm-Q4-NGMw-ZGNl-Xk-Ey-Xk-Fqc-Gc-V1.jpg'}  alt="Slide 2" /></SwiperSlide>
-      <SwiperSlide><img className='w-full h-[33rem] ' src={'https://i.ibb.co.com/8B23J9s/n0-W7kaj-F4-GFMRk2c0w-Ww-MQq-Ta-DM.jpg'} alt="Slide 3" /></SwiperSlide>
-      <SwiperSlide><img className='w-full h-[33rem] ' src={'https://i.ibb.co.com/8ch52SV/MV5-BNz-Y3-OWQ5-NDkt-NWQ2-OC00-Zjdl-LThk-Mm-It-MDhh-NDk3-NTFi-ZGU4-Xk-Ey-Xk-Fqc-Gc-V1.jpg'} alt="Slide 4" /></SwiperSlide>
-      <SwiperSlide><img className='w-full h-[33rem] ' src={'https://i.ibb.co.com/FHk6VkS/51bsjerr5z-L.jpg'} alt="Slide 5" /></SwiperSlide>
-      <SwiperSlide><img className='w-full h-[33rem]' src={'https://i.ibb.co.com/M9xpZSy/MV5-BNDhl-Mz-Ey-Nz-It-MTA5-Mi00-YWRh-LThl-NTkt-YTQy-MTA0-MDIy-NDEy-Xk-Ey-Xk-Fqc-Gc-V1-FMjpg-UX1000.jpg'} alt="Slide 6" /></SwiperSlide>
-      <SwiperSlide><img className='w-full h-[33rem]' src={'https://i.ibb.co.com/3yr3S0N/MV5-BMTM3-Nj-A1-NDMy-MV5-BMl5-Ban-Bn-Xk-Ft-ZTcw-MDQz-NDMz-OQ-V1.jpg'}  alt="Slide 7" /></SwiperSlide>
-      {/* Additional slides here */}
+      {sliderData.map((slide, index) => (
+        <SwiperSlide key={index} className="relative group">
+          {/* Slide Image */}
+          <img
+            className="w-full h-[33rem] rounded-lg"
+            src={slide.img}
+            alt={slide.title}
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <h3 className="text-white text-2xl font-bold">{slide.title}</h3>
+            <p className="text-gray-300 text-lg">{slide.genre}</p>
+            <span className="text-yellow-400 font-medium">{slide.rating}</span>
+          </div>
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };

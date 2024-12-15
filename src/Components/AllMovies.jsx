@@ -21,7 +21,7 @@ const AllMovies = ({ singleData }) => {
                 <p className="text-sm text-gray-500">Duration: {duration} mins</p>
                 <p className="text-sm text-gray-500">Release Year: {releaseYear}</p>
                 {/* Rating */}
-                <p className="text-sm text-gray-500">Rating: {rating.length === 2 ? rating[1] : rating[0]}</p>
+                <p className="text-sm text-gray-500">Rating: {rating[rating.length-1]}</p>
                 </div>
                
                 {/* See Details Button */}
