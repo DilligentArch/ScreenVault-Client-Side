@@ -17,27 +17,29 @@ import AllMoviesLayout from "./AllMoviesLayout/AllMoviesLayout";
 import MovieDetailsLayout from "./MovieDetailsLayout/MovieDetailsLayout";
 import PrivateRoute from "./PrivateLayout/PrivateRoute";
 import FavoriteMovieLayout from "./FavoriteMovieLayout/FavoriteMovieLayout";
+import UpdateMovie from "./Components/UpdateMovie";
+import UpdateMovieLayout from "./UpdateMovieLayout/UpdateMovieLayout";
 
 const router = createBrowserRouter([
  
   {
     path: "/",
     element: <HomeLayout></HomeLayout>,
-    loader:()=>fetch('http://localhost:5000/movies/top-rated'),
+    loader:()=>fetch('https://screenvault-server.vercel.app/movies/top-rated'),
   },
   {
     path: "/movies/:id", 
     element: <PrivateRoute>
       <MovieDetailsLayout />,
     </PrivateRoute>,
-    loader: ({ params }) =>fetch(`http://localhost:5000/movies/${params.id}`),
+    loader: ({ params }) =>fetch(`https://screenvault-server.vercel.app/movies/${params.id}`),
   },
   {
     path: "/favorites/:email", 
     element: <PrivateRoute>
       <FavoriteMovieLayout></FavoriteMovieLayout>
     </PrivateRoute>,
-    loader: ({ params }) => fetch(`http://localhost:5000/favorites/${params.email}`)
+    loader: ({ params }) => fetch(`https://screenvault-server.vercel.app/favorites/${params.email}`)
   },
   {
     path: "/add-movie",
@@ -46,9 +48,17 @@ const router = createBrowserRouter([
     </PrivateRoute>,
   },
   {
+    path: "/update-movie/:id",
+    element: <PrivateRoute>
+      <UpdateMovieLayout></UpdateMovieLayout>
+    </PrivateRoute>,
+      loader: ({ params }) =>
+        fetch(`https://screenvault-server.vercel.app/movies/${params.id}`),
+  },
+  {
     path: "/all-movies",
     element: <AllMoviesLayout></AllMoviesLayout>,
-    loader:()=>fetch('http://localhost:5000/movies'),
+    loader:()=>fetch('https://screenvault-server.vercel.app/movies'),
   },
   {
     path: "/auth",

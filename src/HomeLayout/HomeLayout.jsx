@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Fotter';
 import { useLoaderData } from 'react-router-dom';
 import Home from '../Components/Home';
+import SliderSection from '../Components/SliderSection';
 
 const HomeLayout = () => {
     const data= useLoaderData();
@@ -10,6 +11,7 @@ const HomeLayout = () => {
         <div>
             <header><Navbar></Navbar></header>
             <main>
+                <SliderSection></SliderSection>
             <div className="container mx-auto p-4">
                     <h2 className="text-3xl font-semibold text-teal-500 text-center mb-6">Featured  Movies</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

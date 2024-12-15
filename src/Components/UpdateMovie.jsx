@@ -1,17 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
-const AddMovies = () => {
+const UpdateMovie = () => {
+  const navigate = useNavigate();
+  const movie = useLoaderData(); // Load the movie data to be updated
   const { user } = useContext(AuthContext);
+
+  // Pre-fill the form with the movie data
   const [movieData, setMovieData] = useState({
-    poster: "",
-    title: "",
-    genre: "",
-    duration: "",
-    releaseYear: "",  // Text input for release year
-    rating: 0, // Rating initialized to 0
-    summary: "",
+    poster: movie.poster || "",
+    title: movie.title || "",
+    genre: movie.genre || "",
+    duration: movie.duration || "",
+    releaseYear: movie.releaseYear || "",
+    rating: movie.rating || 0,
+    summary: movie.summary || "",
   });
 
   const genres = ["Comedy", "Drama", "Horror", "Action", "Romance", "Sci-Fi"];
@@ -27,7 +32,6 @@ const AddMovies = () => {
     const { poster, title, genre, duration, releaseYear, rating, summary } =
       movieData;
 
-    // URL validation
     if (!poster || !/^https?:\/\/.+/.test(poster)) {
       toast.error("Please provide a valid image URL.");
       return false;
@@ -66,48 +70,32 @@ const AddMovies = () => {
     return true;
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      const form = e.target;
-      const email = form.email.value;
-      const { poster, title, genre, duration, releaseYear, rating, summary } =
-        movieData;
-
-      const newMovie = {
-        email,
-        poster,
-        title,
-        genre,
-        duration,
-        releaseYear,
-        rating,
-        summary,
+      const updatedMovie = {
+        ...movieData,
+        email: user.email,
       };
 
-      fetch('https://screenvault-server.vercel.app/movies', {
-        method: 'POST',
+      fetch(`https://screenvault-server.vercel.app/movies/${movie._id}`, {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(newMovie),
+        body: JSON.stringify(updatedMovie),
       })
-        .then(res => res.json())
-        .then(data => {
-          if (data.insertedId) toast.success("Movie added successfully!");
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.modifiedCount > 0) {
+            toast.success("Movie updated successfully!");
+            navigate("/all-movies"); // Redirect to the movies page
+          } else {
+            toast.error("Failed to update the movie.");
+          }
         });
-
-      // Don't reset form if validation fails
-      setMovieData({
-        poster: "",
-        title: "",
-        genre: "",
-        duration: "",
-        releaseYear: "",
-        rating: 0,
-        summary: "",
-      });
     }
   };
 
@@ -116,7 +104,7 @@ const AddMovies = () => {
       <Toaster />
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center text-teal-500 mb-6">
-          Add a Movie
+          Update Movie
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Email (Read-only) */}
@@ -204,7 +192,7 @@ const AddMovies = () => {
             />
           </div>
 
-          {/* Release Year - Text input instead of dropdown */}
+          {/* Release Year */}
           <div>
             <label htmlFor="releaseYear" className="block text-sm font-medium text-gray-700">
               Release Year
@@ -258,7 +246,7 @@ const AddMovies = () => {
             type="submit"
             className="w-full py-2 text-white bg-teal-500 rounded-lg hover:bg-teal-600 transition font-medium"
           >
-            Add Movie
+            Update Movie
           </button>
         </form>
       </div>
@@ -266,4 +254,4 @@ const AddMovies = () => {
   );
 };
 
-export default AddMovies;
+export default UpdateMovie;
