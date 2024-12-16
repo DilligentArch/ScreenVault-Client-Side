@@ -13,20 +13,20 @@ const SliderSection = () => {
             {/* Hero Section */}
             <div
                 className="hero bg-gradient-to-r from-blue-900 via-teal-800 to-teal-600 text-white py-10"
-                data-aos="fade-in"
+                
             >
                 <div className="hero-content text-center">
                     <div className="max-w-md">
                         <h1
                             className="text-5xl font-bold text-orange-400"
-                            data-aos="fade-up"
+                           
                         >
                             Welcome to <span className="text-yellow-400">ScreenVault</span>
                         </h1>
                         <p
                             className="py-6 text-gray-300 text-lg"
-                            data-aos="fade-up"
-                            data-aos-delay="200"
+                            
+                         
                         >
                             Discover, explore, and keep track of your favorite movies. Your movie adventure starts here!
                         </p>
