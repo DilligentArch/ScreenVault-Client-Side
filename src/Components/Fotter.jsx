@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Footer = () => {
-  const {user}=useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
   return (
-    <footer className="bg-teal-700 text-white py-8 max-w-screen-2xl mx-auto">
+    <footer className="bg-teal-700 text-white py-8">
       <div className="max-w-7xl mx-auto px-6">
         {/* Top Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -45,13 +46,13 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Social Media */}
+          {/* Social Media and Contact */}
           <div>
-            <h3 className="text-lg font-bold mb-2">Follow Us</h3>
+            <h3 className="text-lg font-bold mb-2">Stay Connected</h3>
             <p className="text-sm text-gray-200 mb-4">
-              Stay connected with ScreenVault on social media for updates, recommendations, and movie discussions.
+              Stay connected with ScreenVault on social media or reach out to us directly via email.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-4">
               <a
                 href="https://www.facebook.com/nayeb.qureshi.2024"
                 target="_blank"
@@ -76,6 +77,20 @@ const Footer = () => {
               >
                 <FaInstagram className="text-2xl hover:text-pink-500 transition-colors" />
               </a>
+            </div>
+
+            {/* Contact Email */}
+            <div>
+              <h4 className="text-md font-bold text-gray-200">Contact Us</h4>
+              <p className="text-sm text-gray-300">
+                Email:{" "}
+                <a
+                  href="mailto:support@screenvault.com"
+                  className="hover:underline text-gray-200"
+                >
+                  support@screenvault.com
+                </a>
+              </p>
             </div>
           </div>
         </div>

@@ -5,13 +5,13 @@ import { useLoaderData, Link } from 'react-router-dom';
 import Home from '../Components/Home';
 import SliderSection from '../Components/SliderSection';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; 
+import 'aos/dist/aos.css';
 
 const HomeLayout = () => {
   const data = useLoaderData();
 
   useEffect(() => {
-    AOS.init({ duration: 1000 }); 
+    AOS.init({ duration: 1000 });
   }, []);
 
   return (
@@ -24,7 +24,7 @@ const HomeLayout = () => {
         <SliderSection />
 
         {/* Discover Top Movies Section */}
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-4 ">
           <h2
             className="text-3xl font-semibold text-teal-500 text-center mb-6"
             data-aos="fade-up"
@@ -67,7 +67,7 @@ const HomeLayout = () => {
         </div>
 
         {/* Trending Movies Section */}
-        <div className="bg-gray-100 py-12 max-w-screen-2xl mx-auto">
+        <div className="bg-gray-100 py-12   ">
           <div className="container mx-auto">
             <h2
               className="text-3xl font-semibold text-gray-700 text-center mb-6"
@@ -105,46 +105,109 @@ const HomeLayout = () => {
           </div>
         </div>
 
-        {/* Movie Insights Section */}
-        <div className="bg-gray-800 text-white py-12 max-w-screen-2xl mx-auto">
-          <div className="container mx-auto">
-            <h2
-              className="text-3xl font-semibold text-teal-400 text-center mb-6"
-              data-aos="fade-left"
+        <div>
+        </div>
+        {/* extra */}
+        <div className="bg-gray-100 py-12">
+          <h1
+            className="text-3xl font-bold text-center text-teal-600 mb-4"
+            data-aos="fade-down"
+          >
+            Famous Movie Directors
+          </h1>
+          <p
+            className="text-center text-gray-500 mb-8 w-10/12 lg:w-8/12 mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            Dive into the works of some of the most iconic directors in film history. Discover their top movies and lasting legacies.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-11/12 mx-auto">
+            {/* Director 1 */}
+            <div
+              className="card card-compact bg-white w-full shadow-lg rounded-lg overflow-hidden"
+              data-aos="zoom-in"
+              data-aos-duration="800"
             >
-              Movie Insights
-            </h2>
-            <p
-              className="text-center text-gray-300 mb-8"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
-              Explore fascinating trivia and behind-the-scenes facts about your favorite movies.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="p-4 bg-gray-900 rounded-lg shadow-md" data-aos="flip-left">
-                <h3 className="text-xl font-bold text-orange-400 mb-2">Did You Know?</h3>
-                <p className="text-gray-300">
-                  The highest-grossing movie of all time is *Avatar* with over $2.8 billion in earnings.
+              <figure>
+                <img
+                  src="https://i.ibb.co/ZTy9YkH/Christopher-Nolan.webp"
+                  alt="Christopher Nolan"
+                  className="w-full h-64 object-cover"
+                />
+              </figure>
+              <div className="card-body p-6">
+                <h2
+                  className="card-title text-xl font-semibold text-teal-600"
+                  data-aos="fade-left"
+                  data-aos-delay="400"
+                >
+                  Christopher Nolan
+                </h2>
+                <p className="text-gray-600" data-aos="fade-left" data-aos-delay="600">
+                  <strong>Known for:</strong> Inception, The Dark Knight, Interstellar
                 </p>
               </div>
-              <div className="p-4 bg-gray-900 rounded-lg shadow-md" data-aos="flip-left" data-aos-delay="200">
-                <h3 className="text-xl font-bold text-orange-400 mb-2">Trivia</h3>
-                <p className="text-gray-300">
-                  The famous “I am your father” line from *Star Wars* was kept secret from the cast until the final shoot.
+            </div>
+
+            {/* Director 2 */}
+            <div
+              className="card card-compact bg-white w-full shadow-lg rounded-lg overflow-hidden"
+              data-aos="zoom-in"
+              data-aos-duration="800"
+            >
+              <figure>
+                <img
+                  src="https://i.ibb.co/gmfPGRG/quentin-tarantino-director-view-wallpaper-preview.jpg"
+                  alt="Quentin Tarantino"
+                  className="w-full h-64 object-cover"
+                />
+              </figure>
+              <div className="card-body p-6">
+                <h2
+                  className="card-title text-xl font-semibold text-teal-600"
+                  data-aos="fade-left"
+                  data-aos-delay="400"
+                >
+                  Quentin Tarantino
+                </h2>
+                <p className="text-gray-600" data-aos="fade-left" data-aos-delay="600">
+                  <strong>Known for:</strong> Pulp Fiction, Kill Bill, Django Unchained
                 </p>
               </div>
-              <div className="p-4 bg-gray-900 rounded-lg shadow-md" data-aos="flip-left" data-aos-delay="400">
-                <h3 className="text-xl font-bold text-orange-400 mb-2">Behind the Scenes</h3>
-                <p className="text-gray-300">
-                  The *Lord of the Rings* trilogy was shot back-to-back over 438 days in New Zealand.
+            </div>
+
+            {/* Director 3 */}
+            <div
+              className="card card-compact bg-white w-full shadow-lg rounded-lg overflow-hidden"
+              data-aos="zoom-in"
+              data-aos-duration="800"
+            >
+              <figure>
+                <img
+                  src="https://i.ibb.co/w4CbVdZ/greta-2.webp"
+                  alt="Greta Gerwig"
+                  className="w-full h-64 object-cover"
+                />
+              </figure>
+              <div className="card-body p-6">
+                <h2
+                  className="card-title text-xl font-semibold text-teal-600"
+                  data-aos="fade-left"
+                  data-aos-delay="400"
+                >
+                  Greta Gerwig
+                </h2>
+                <p className="text-gray-600" data-aos="fade-left" data-aos-delay="600">
+                  <strong>Known for:</strong> Lady Bird, Little Women, Barbie
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        
+
+
 
       </main>
       <Footer />
