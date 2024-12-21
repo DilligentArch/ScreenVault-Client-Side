@@ -7,6 +7,7 @@ const Navbar = () => {
   const location = useLocation();
   const { user, logOut, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
+  
 
   // State for loading spinner
   const [isLoading, setIsLoading] = useState(false);

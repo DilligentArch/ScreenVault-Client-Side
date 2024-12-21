@@ -4,7 +4,7 @@ ScreenVault is your ultimate movie hub where you can explore, rate, and keep tra
 
 ## Live Site URL
 
-[Live Site - ScreenVault](https://your-live-site-url.com)  *(Replace this with your actual live site URL)*
+[Live Site - ScreenVault](https://fprojects-23221.web.app/)  
 
 ## Features
 

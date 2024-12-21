@@ -15,7 +15,7 @@ const HomeLayout = () => {
   }, []);
 
   return (
-    <div>
+    <div className='dark'>
       <header>
         <Navbar />
       </header>

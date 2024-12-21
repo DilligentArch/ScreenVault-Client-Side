@@ -4,6 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 
 const SliderSection = () => {
+    
     useEffect(() => {
         AOS.init({ duration: 1000 }); // Initialize AOS with default duration
     }, []);
