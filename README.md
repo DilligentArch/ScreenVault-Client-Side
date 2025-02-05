@@ -153,7 +153,7 @@ We welcome contributions! To contribute:
 
 
 ## 👤 **Author & Acknowledgments**
-👨‍💻 Developed by **[Nayeb Ahmed Qureshi(https://github.com/DilligentArch)**.  
+👨‍💻 Developed by **[Nayeb Ahmed Qureshi](https://github.com/DilligentArch)**.  
 
 
 ---
