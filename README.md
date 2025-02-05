@@ -115,7 +115,7 @@ ScreenVault is your go-to **movie tracking platform**, allowing you to **discove
 
 ### **Backend**
 - `express`, `cors`, `dotenv`
-- `mongodb`, `jsonwebtoken`
+- `mongodb`
 
 ### **Dev Dependencies**
 - `eslint`, `eslint-plugin-react`
